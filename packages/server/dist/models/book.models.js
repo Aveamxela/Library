@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateBook = exports.deleteBook = exports.findAllBook = exports.findBookById = exports.pushBook = void 0;
 const drizzle_orm_1 = require("drizzle-orm");
 const pool_1 = require("../config/pool");
-const schemas_1 = require("../schemas");
 const utils_1 = require("../utils");
+const schemas_1 = require("../schemas");
 const pushBook = (book) => {
     try {
         return pool_1.db.insert(schemas_1.books).values(book).returning({ id: schemas_1.books.id, title: schemas_1.books.title }).execute();

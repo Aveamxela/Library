@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const borrow_controller_1 = require("../controllers/borrow.controller");
+const auth_middleare_1 = require("../middlewares/auth.middleare");
+const router = (0, express_1.Router)();
+router.get('/', borrow_controller_1.getBorrows);
+router.get('/user/:id', borrow_controller_1.getBorrowsByUser);
+router.post('/', auth_middleare_1.authMiddleware, borrow_controller_1.borrowBook);
+router.delete('/:id', auth_middleare_1.authMiddleware, borrow_controller_1.returnBook);
+exports.default = router;

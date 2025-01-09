@@ -3,40 +3,40 @@ import { Request, Response } from "express";
 import { deleteBook, findAllBook, findBookById, pushBook, updateBook} from "../models/book.models";
 import { APIResponse } from "../utils";
 
-export const getBooks = async (request: Request, response: Response) => {
+export const getBooks = async (req: Request, res: Response) => {
     const books = await findAllBook();
-    APIResponse(response, books, "All books", 200);
+    APIResponse(res, books, "All books", 200);
 }
 
-export const getBookById = async (request: Request, response: Response) => {
-    const { id } = request.params;
+export const getBookById = async (req: Request, res: Response) => {
+    const { id } = req.params;
 
     const book = await findBookById(id);
     if (book) {
-        APIResponse(response, book, "Book found", 200);
+        APIResponse(res, book, "Book found", 200);
     } else {
-        APIResponse(response, null, "Book not found", 404);
+        APIResponse(res, null, "Book not found", 404);
     }
 }
 
-export const addBook = async (request: Request, response: Response) => {
-    const newBook = request.body;
+export const addBook = async (req: Request, res: Response) => {
+    const newBook = req.body;
 
     await pushBook(newBook);
-    APIResponse(response, newBook, "Book created", 201);
+    APIResponse(res, newBook, "Book created", 201);
 }
 
-export const deleteBookById = async (request: Request, response: Response) => {
-    const { id } = request.params;
-    
+export const deleteBookById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
     await deleteBook(id);
-    APIResponse(response, null, "Book deleted", 204);
+    APIResponse(res, null, "Book deleted", 204);
 }
 
-export const updateBookById = async (request: Request, response: Response) => {
-    const { id } = request.params;
-    const { book } = request.body;
+export const updateBookById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { book } = req.body;
 
     await updateBook(id, book);
-    APIResponse(response, book, "Book updated", 200);
+    APIResponse(res, book, "Book updated", 200);
 }

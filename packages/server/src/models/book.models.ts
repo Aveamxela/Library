@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
 import { db } from "../config/pool";
 import { NewBook } from "../entities/Book";
-import { books } from "../schemas";
 import { logger } from "../utils";
+import { books } from "../schemas";
 
 
 export const pushBook = (book: NewBook) => {
