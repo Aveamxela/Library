@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', getBorrows);
 
-router.get('/user/:id', getBorrowsByUser);
+router.get('/user/:id', authMiddleware, getBorrowsByUser);
 
 router.post('/', authMiddleware, borrowBook);
 

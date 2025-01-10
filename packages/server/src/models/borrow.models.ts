@@ -3,6 +3,7 @@ import { db } from "../config/pool";
 import { logger } from "../utils";
 import { borrows } from "../schemas/borrows";
 import { books } from "../schemas";
+import { log } from "console";
 
 export const createBorrow = (userId: string, bookId: string) => {
     try {
@@ -17,7 +18,7 @@ export const createBorrow = (userId: string, bookId: string) => {
 };
 
 export const findBorrowsByUserId = (userId: string) => {
-    try {
+    try {        
         return db
             .select()
             .from(borrows)

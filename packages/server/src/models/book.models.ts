@@ -55,9 +55,9 @@ export const findAllBook = () => {
 
 export const deleteBook = (id: string) => {
     try {
-        return db.delete(books).where(
-            eq(books.id, id)
-        ).execute();
+        return db.delete(books)
+        .where(eq(books.id, id))
+        .execute();
     } catch (err: any) {
         logger.error(`Erreur lors de la suppression du livre: ${err.message}`);
         throw new Error('Impossible de supprimer le livre')
@@ -72,6 +72,36 @@ export const updateBook = (id: string, book: NewBook) => {
         ).execute();
     } catch (err: any) {
         logger.error(`Erreur lors de la mise à jour du livre: ${err.message}`);
-        return null;
+        throw new Error('Impossible de mettre à jour le livre');
     }
 }
+
+export const checkBookAvailability = async (bookId: string) => {
+    try {
+        const [book] = await db // expliquer crochet
+            .select()
+            .from(books)
+            .where(eq(books.id, bookId))
+            .execute();
+
+        if (book && book.available) {
+            return true;
+        }
+        return false;
+    } catch (err: any) {
+        logger.error(`Erreur lors de la prise d'information sur la disponibilité du livre: ${err.message}`);
+        throw new Error(`Impossible d'accéder à la disponibilité du livre`);
+    }
+}
+
+export const updateBookAvailability = (bookId: string, available: boolean) => {
+    try{
+        return db.update(books)
+        .set({ available })
+        .where(eq(books.id, bookId))
+        .execute();
+    } catch (err: any) {
+        logger.error(`Erreur lors de la mise à jour de la disponibilité du livre: ${err.message}`);
+        throw new Error('Impossible de mettre à jour la disponibilité du livre');
+    }
+};
