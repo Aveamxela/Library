@@ -28,17 +28,20 @@ Library est une application de gestion de bibliothèque. Elle permet aux utilisa
 - **PostgreSQL**
 
 ### Étapes d'installation
-Cloner le projet
-cd library
-pnpm install
-Créer un fichier .env dans packages/server
-PORT=your_port
-NODE_ENV=development
-JWT_SECRET=your_secre_key
-FRONTEND_URL=url_frontend
-DATABASE_URL=postgresql://username:password@localhost:5432/library
-dans packages/server
-pnpm run generate
-pnpm run migrate
-Lancer le projet, sur Library
-pnpm dev
+- **Cloner le projet**
+- **cd library**
+- **pnpm install**
+  
+### Créer un fichier .env dans packages/server
+- **PORT=your_port**
+- **NODE_ENV=development**
+- **JWT_SECRET=your_secre_key**
+- **FRONTEND_URL=url_frontend**
+- **DATABASE_URL=postgresql://username:password@localhost:5432/library**
+
+- **dans packages/server**
+- **pnpm run generate**
+- **pnpm run migrate**
+
+### Lancer le projet, sur Library
+-**pnpm dev**
